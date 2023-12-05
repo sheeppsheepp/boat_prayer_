@@ -3195,7 +3195,7 @@ hr.rectangle-2-left {
 
 @media screen and (max-width: 600px) {
   .responsive-image {
-    width: 80%; /* 100% 寬度，根據父容器調整 */
+    width: 100%; /* 100% 寬度，根據父容器調整 */
     height: auto; /* 自動計算高度，保持比例 */
   }
 }

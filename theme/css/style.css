@@ -3188,5 +3188,30 @@ hr.rectangle-2-left {
   color: black;
 }
 
+.responsive-image {
+  width: 100%; /* 100% 寬度，根據父容器調整 */
+  height: auto; /* 自動計算高度，保持比例 */
+}
 
+@media screen and (max-width: 600px) {
+  .responsive-image {
+    width: 50%; /* 100% 寬度，根據父容器調整 */
+    height: auto; /* 自動計算高度，保持比例 */
+  }
+}
+
+/* 在中型螢幕上設定不同的寬度 */
+@media screen and (min-width: 601px) and (max-width: 1200px) {
+  .responsive-image {
+    width: 50%; /* 50% 寬度，根據父容器調整 */
+    height: auto; /* 自動計算高度，保持比例 */
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  .responsive-image {
+    width: 50%; /* 100% 寬度，根據父容器調整 */
+    height: auto; /* 自動計算高度，保持比例 */
+  }
+}
 

@@ -126,10 +126,10 @@ $(document).ready(function () {
 					duration: 1000,
 					easing: 'swing',
 					step: function () {
-						$this.text(Math.floor(this.countNum)+'%');
+						$this.text(Math.floor(this.countNum) + '%');
 					},
 					complete: function () {
-						$this.text(this.countNum+'%');
+						$this.text(this.countNum + '%');
 					}
 				});
 			});
@@ -138,6 +138,247 @@ $(document).ready(function () {
 	$(window).on('scroll', function () {
 		counter();
 	});
+
+	// ----------------------------------------------------------
+
+	function enableScroll() {
+		document.body.classList.remove('modal-open');
+	}
+
+	function disableScroll() {
+		document.body.classList.add('modal-open');
+	}
+
+	let btn = document.querySelector("#showbtn");
+	let question = document.querySelector("#showScore");
+	let overlay = document.querySelector("#overlay");
+	let close = document.querySelector("#close");
+
+
+
+	btn.addEventListener("click", function () {
+		overlay.style.display = "flex";
+	});
+
+
+	close.addEventListener("click", function () {
+		overlay.style.display = "none";
+	});
+
+	question.addEventListener("click", function () {
+		enableScroll();
+	})
+
+
+	document.getElementById('showbtn').addEventListener('click', function () {
+		document.getElementById('modal').style.display = 'block';
+		document.body.classList.add('modal-open');
+	});
+
+
+	document.getElementById('close').addEventListener('click', function () {
+		document.getElementById('overlay').style.display = 'none';
+		document.body.classList.remove('modal-open');
+	});
+
+
+	let showQuestionBtn = document.getElementById('showQuestion');
+	let overlayQuestion = document.getElementById('overlayQuestion');
+
+	showQuestionBtn.addEventListener('click', function () {
+		overlayQuestion.style.display = 'flex';
+		document.body.classList.add('modal-open');
+	});
+
+
+	//  ---------------------------------------------------------------
+
+	let totalScore = 0;
+	let currentQuestion = 1;
+	const totalQuestions = 13;
+	// ---------------------------------------------------------
+	const nicknameForm = document.getElementById("nicknameForm");
+	const nicknameInput = document.getElementById("nickname");
+
+	let userNickname = "";
+
+	nicknameForm.addEventListener("submit", function (event) {
+		event.preventDefault();
+		userNickname = nicknameInput.value;
+		overlay.style.display = "none";
+		quizDiv.style.display = "block";
+		overlayQuestion.style.display = 'flex';
+		enableScroll();
+	});
+	// ---------------------------------------------------------
+	window.checkAnswer = function (selectedOption) {
+		let correctAnswer;
+
+		switch (currentQuestion) {
+			case 1:
+				correctAnswer = 'A';
+				break;
+			case 2:
+				correctAnswer = 'B';
+				break;
+			case 3:
+				correctAnswer = 'D';
+				break;
+			case 4:
+				correctAnswer = 'B';
+				break;
+			case 5:
+				correctAnswer = 'B';
+				break;
+			case 6:
+				correctAnswer = 'D';
+				break;
+			case 7:
+				correctAnswer = 'B';
+				break;
+			case 8:
+				correctAnswer = 'D';
+				break;
+			case 9:
+				correctAnswer = 'B';
+				break;
+			case 10:
+				correctAnswer = 'A';
+				break;
+			case 11:
+				correctAnswer = 'C';
+				break;
+			case 12:
+				correctAnswer = 'D';
+				break;
+			case 13:
+				correctAnswer = 'A';
+				break;
+			default:
+				correctAnswer = '';
+		}
+
+		const isCorrect = selectedOption === correctAnswer;
+
+		const answerButtons = document.querySelectorAll('#overlayQuestion #qs .question button');
+		answerButtons.forEach(button => {
+			// if (isCorrect) {
+			// 	button.style.backgroundColor = '#eedccd';
+			// } 
+			var corrtext = button.innerText.substring(0, 1);
+			console.log(`Selected coption text: ${corrtext}`);
+			if (corrtext === correctAnswer) {
+				console.log(`Correct answer: ${correctAnswer.trim()}`);
+				button.style.backgroundColor = isCorrect ? '#eedccd' : '#837f7e';
+			} else {
+				console.log(`Correct answer2: ${isCorrect}`);
+				console.log(`INCorrect answer: ${correctAnswer.trim()}`);
+				button.style.backgroundColor = '#655E7A';
+			}
+			button.disabled = true;
+			enableScroll();
+		});
+		if (isCorrect) {
+			totalScore += 10;
+		}
+
+		setTimeout(() => {
+			if (currentQuestion < totalQuestions) {
+				currentQuestion++;
+				resetQuestion();
+				showNextQuestion();
+			} else {
+				overlayQuestion.style.display = "none";
+				alert(userNickname + " 探險家，恭喜你獲得總分: " + totalScore);
+			}
+			enableScroll();
+		}, 1000);
+	}
+
+	function resetQuestion() {
+		const answerButtons = document.querySelectorAll('#overlayQuestion #qs .question button');
+		answerButtons.forEach(button => {
+			button.style.backgroundColor = '';
+			button.disabled = false;
+		});
+		disableScroll();
+	}
+
+	const questionTexts = [
+		"「舟參」船儀式共有幾個階段？",
+		"「舟參」船儀式中要如何選定要用的枝幹？",
+		"「舟參」船儀式中選定要用的枝幹後會攜帶什麼顏色的綵帶去作記號？",
+		"姑媽宮時期的香科一共延續了多少科？",
+		"王船哪個器物是用以照妖辟邪？",
+		"慶安宮的特色代表物？",
+		"南巡最初的目的是什麼？",
+		"請王儀式的最後一個步驟是什麼？",
+		"三日香醮中，下列何者不是其重心？",
+		"燒王船在王船醮流程中的哪個步驟？",
+		"送王中「拍船醮」的意義為何？",
+		"「傳說」搶得鯉魚旗的人會如何？",
+		"什麼情況下代表「送王」結束？"
+	];
+
+	const optionsTexts = [
+		['A.6個', 'B.3個', 'C.8個', 'D.10個'],
+		['A.看哪個枝幹最大', 'B.擲筊問神明', 'C.看哪個枝幹離廟宇最近', 'D.隨便選'],
+		['A.綠色', 'B.藍色', 'C.白色', 'D.紅色'],
+		['A.10科', 'B.13科', 'C.36科', 'D.49科'],
+		['A.崁巾', 'B.獸面鏡', 'C.銅錢', 'D.龍目'],
+		['A.龍', 'B.皮卡丘', 'C.石獅', 'D.鯉魚'],
+		['A.舉辦盛大的遶境儀式', 'B.前往城隍廟進香謁祖', 'C.往南邊巡邏', 'D.尋求神明庇佑'],
+		['A.主道長頌經文', 'B.眾人擲筊求得三個聖杯', 'C.眾人朝西跪拜', 'D.回府結束請王儀式'],
+		['A.王府行儀', 'B.豎燈篙', 'C.醮壇科儀', 'D.信徒活動'],
+		['A.送王', 'B.請王', 'C.南巡', 'D.造王船'],
+		['A.看王船是否是堅固的', 'B.幫王船拍張照', 'C.為王船開水路', 'D.代表送王結束'],
+		['A.會拿到一筆錢', 'B.可以找到另一半', 'C.不會怎樣', 'D.未來三年大發'],
+		['A.道長將七星旗丟入火焰中', 'B.拍船醮', 'C.跟王船說掰掰後', 'D.跟王船拍張合照後']
+	];
+
+	const newOptionsTexts = [
+		['A', 'B', 'C', 'D'],
+		['A', 'B', 'C', 'D'],
+		['A', 'B', 'C', 'D']
+	];
+
+
+	function showNextQuestion() {
+		const questionText = document.querySelector('#overlayQuestion #qs #questionText');
+		questionText.innerText = currentQuestion + '. ' + questionTexts[currentQuestion - 1];
+
+		const optionsButtons = document.querySelectorAll('#overlayQuestion #qs .question button');
+		optionsButtons.forEach((button, index) => {
+			button.innerText = optionsTexts[currentQuestion - 1][index];
+			console.log(`Selected option text: ${button.innerText}`);
+		});
+
+		const nextQuestionForm = document.querySelector('#overlayQuestion #qs .question');
+		nextQuestionForm.id = 'Q' + currentQuestion + 'Form';
+
+		const nextQuestionInput = document.querySelector('#overlayQuestion #qs .question input');
+		nextQuestionInput.id = 'Q' + currentQuestion + '_';
+
+		overlayQuestion.style.display = "flex";
+		disableScroll();
+		
+	}
+
+	const showQuestionButton = document.querySelector("#showQuestion");
+	showQuestionButton.addEventListener("click", showNextQuestion);
+
+	// const showScoreButton = document.querySelector("#showScore2");
+	// showScoreButton.addEventListener("click", function () {
+	// 	overlayQuestion.style.display = "visible";
+	// 	alert(userNickname + " 探險家，恭喜你獲得總分: " + totalScore);
+	// });
+
+
+
+
+
+
+
 
 
 });

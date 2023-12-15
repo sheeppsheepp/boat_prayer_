@@ -195,7 +195,7 @@ $(document).ready(function () {
 
 	let totalScore = 0;
 	let currentQuestion = 1;
-	const totalQuestions = 13;
+	const totalQuestions = 8;
 	// ---------------------------------------------------------
 	const nicknameForm = document.getElementById("nicknameForm");
 	const nicknameInput = document.getElementById("nickname");
@@ -216,42 +216,27 @@ $(document).ready(function () {
 
 		switch (currentQuestion) {
 			case 1:
-				correctAnswer = 'A';
+				correctAnswer = 'B';
 				break;
 			case 2:
-				correctAnswer = 'B';
+				correctAnswer = 'D';
 				break;
 			case 3:
-				correctAnswer = 'D';
+				correctAnswer = 'B';
 				break;
 			case 4:
-				correctAnswer = 'B';
+				correctAnswer = 'D';
 				break;
 			case 5:
-				correctAnswer = 'B';
-				break;
-			case 6:
-				correctAnswer = 'D';
-				break;
-			case 7:
-				correctAnswer = 'B';
-				break;
-			case 8:
-				correctAnswer = 'D';
-				break;
-			case 9:
-				correctAnswer = 'B';
-				break;
-			case 10:
 				correctAnswer = 'A';
 				break;
-			case 11:
+			case 6:
 				correctAnswer = 'C';
 				break;
-			case 12:
+			case 7:
 				correctAnswer = 'D';
 				break;
-			case 13:
+			case 8:
 				correctAnswer = 'A';
 				break;
 			default:
@@ -305,15 +290,10 @@ $(document).ready(function () {
 	}
 
 	const questionTexts = [
-		"「舟參」船儀式共有幾個階段？",
 		"「舟參」船儀式中要如何選定要用的枝幹？",
 		"「舟參」船儀式中選定要用的枝幹後會攜帶什麼顏色的綵帶去作記號？",
-		"姑媽宮時期的香科一共延續了多少科？",
 		"王船哪個器物是用以照妖辟邪？",
 		"慶安宮的特色代表物？",
-		"南巡最初的目的是什麼？",
-		"請王儀式的最後一個步驟是什麼？",
-		"三日香醮中，下列何者不是其重心？",
 		"燒王船在王船醮流程中的哪個步驟？",
 		"送王中「拍船醮」的意義為何？",
 		"「傳說」搶得鯉魚旗的人會如何？",
@@ -321,15 +301,10 @@ $(document).ready(function () {
 	];
 
 	const optionsTexts = [
-		['A.6個', 'B.3個', 'C.8個', 'D.10個'],
 		['A.看哪個枝幹最大', 'B.擲筊問神明', 'C.看哪個枝幹離廟宇最近', 'D.隨便選'],
-		['A.綠色', 'B.藍色', 'C.白色', 'D.紅色'],
-		['A.10科', 'B.13科', 'C.36科', 'D.49科'],
+		['A.綠色', 'B.白色', 'C.藍色', 'D.紅色'],
 		['A.崁巾', 'B.獸面鏡', 'C.銅錢', 'D.龍目'],
 		['A.龍', 'B.皮卡丘', 'C.石獅', 'D.鯉魚'],
-		['A.舉辦盛大的遶境儀式', 'B.前往城隍廟進香謁祖', 'C.往南邊巡邏', 'D.尋求神明庇佑'],
-		['A.主道長頌經文', 'B.眾人擲筊求得三個聖杯', 'C.眾人朝西跪拜', 'D.回府結束請王儀式'],
-		['A.王府行儀', 'B.豎燈篙', 'C.醮壇科儀', 'D.信徒活動'],
 		['A.送王', 'B.請王', 'C.南巡', 'D.造王船'],
 		['A.看王船是否是堅固的', 'B.幫王船拍張照', 'C.為王船開水路', 'D.代表送王結束'],
 		['A.會拿到一筆錢', 'B.可以找到另一半', 'C.不會怎樣', 'D.未來三年大發'],
